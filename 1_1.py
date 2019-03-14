@@ -112,6 +112,27 @@ def gradientDescent(d,N,z,labels):
     return A,c
 
 
+def conjugateGradient(d,N,z,labels):
+    
+    r = np.matmul(A,x) - b
+    p = - r
+    k = 0
+    rInner = np.dot(np.transpose(r),r)
+    while (r!= 0):
+        Apk =np.matmul(A,p)
+        nevner = np.dot(np.transpose(p),Apk)
+        alpha = rInner/nevner
+        x += aplha*p
+        newR = r + alpha*Apk
+        rInnerNew = np.dot(np.transpose(newR),newR)
+        beta = rInnerNew/rInner
+        p = -newR +beta*p
+        k += 1
+        r = newR
+        rInner= rInnerNew
+
+
+
 def main():
     
         
