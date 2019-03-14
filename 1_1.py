@@ -11,9 +11,6 @@ import copy as cp
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 
-d = 2
-N = 100
-
 def vecToMat(a,d): #input vector a and dimension d. Output the symmetric matrix A.
     n=int(d*(d+1)/2)
     A = np.zeros((d,d))
@@ -101,11 +98,29 @@ def gradientDescent(d,N,z,labels):
 
 def main():
     
-    z,labels =init(d,N)
+        
+    d = 2    # d dimensions
+    N = 100  # Iterations during gradient descent
 
+    # Initializing matrix A as diagonal matrix with d dimensions
+    A=np.eye(d)
+    A[0,0] = 25
+    A[0,1] = 0
+    A[1,1] = 5
+    A[1,0] = 0
+    
+    # initializing the translation vector to the centrum of ellipse. 
+    c=np.zeros(d)
+    
+    # Initialize points and labels of two classes
+    z,labels =init(d,N,A,c)
+    
+    
+    # Defines two sorted lists of these classes.
     zInterior = z[labels==1]
     zExterior = z[labels==0]
-
+    
+    # Gradient descent start at A as Identity matrix and c in origo
     A,c = gradientDescent(d,N,z,labels)
 
     yCenter = c[1]
