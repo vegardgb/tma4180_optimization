@@ -24,15 +24,22 @@ def vecToMat(a,d): #input vector a and dimension d. Output the symmetric matrix 
         At[i,i] = 0
     A=A+np.transpose(At)
     return A
+
+"""
+
+Input dimension d and number of points N. returns perturbed points z and corresponding labels
+
+Parameters:
+    d dimensions
+    N points
+    A start matrix 
+    c translation vector. 
     
-def init(d,N): #input dimension d and number of points N. returns perturbed points z and corresponding labels
-    A=np.eye(d)
-    #specify A
-    A[0,0] = 25
-    A[0,1] = 0
-    A[1,1] = 5
-    A[1,0] = 0
-    c=np.zeros(d)
+
+"""
+    
+def init(d, N, A, c): #
+    
     z=np.zeros((N,d))
     labels=np.zeros(N)
     #print(np.linalg.eig(A))
@@ -47,7 +54,16 @@ def init(d,N): #input dimension d and number of points N. returns perturbed poin
         for j in range (d):
             z [i,j] +=np.random.uniform(-0.1,0.1) #perturb
         #radius[i]=np.sqrt(z[i,0]**2+z[i,1]**2)
+    
     return z,labels
+
+"""
+
+r_i(A,c, z,i)
+
+a = [A11, A12, A22]
+
+"""
 
 
 def ri(a,c,zi):
